@@ -7,14 +7,12 @@ exports.getForm = (req, res) => {
 exports.postProducts = (req, res) => {
   const { title, description, image, price, category } = req.body;
   const product = new Product(title, description, image, price, category);
-  product.save(() => {
-    res.redirect('/');
-  });
+  product.save();
+  res.redirect('/');
 };
 
-
 exports.getProducts = (req, res) => {
-  Product.fetchAll(products => {
+  Product.fetchAll((products) => {
     res.render('shop', { pageTitle: 'Shop', products: products });
   });
 };
